@@ -1,0 +1,281 @@
+openapi: 3.0.0
+info:
+  title: TimeSwap API
+  description: API за размяна на студентски задачи на принципа "услуга за услуга".
+  version: "1.0.0"
+
+servers:
+  - url: http://localhost:5000
+    description: Локален сървър за разработка
+
+tags:
+  - name: Auth
+    description: Регистрация и вход
+  - name: Profile
+    description: Потребителски профил
+  - name: Tasks
+    description: Управление на задачи
+  - name: Matching
+    description: Харесвания и размени
+  - name: Rating
+    description: Оценки на потребители
+
+paths:
+  /auth/register:
+    post:
+      tags: [Auth]
+      summary: Регистрация на потребител
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required: [email, password]
+      responses:
+        "201":
+          description: Успешна регистрация
+        "400":
+          description: Грешка при валидация
+
+  /auth/login:
+    post:
+      tags: [Auth]
+      summary: Вход на потребител
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required: [email, password]
+      responses:
+        "200":
+          description: Успешен вход
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+        "401":
+          description: Невалидни данни
+
+  /profile/me:
+    get:
+      tags: [Profile]
+      summary: Връща текущия потребител
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Потребителски профил
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  email:
+                    type: string
+                  reputation:
+                    type: number
+
+  /tasks:
+    get:
+      tags: [Tasks]
+      summary: Списък с всички задачи
+      responses:
+        "200":
+          description: Успешен отговор
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Task"
+    post:
+      tags: [Tasks]
+      summary: Публикуване на задача
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TaskInput"
+      responses:
+        "201":
+          description: Създадена задача
+
+  /tasks/{id}:
+    get:
+      tags: [Tasks]
+      summary: Връща конкретна задача
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Успешно
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Task"
+
+  /like:
+    post:
+      tags: [Matching]
+      summary: Харесване на задача
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                task_id:
+                  type: integer
+              required: [task_id]
+      responses:
+        "200":
+          description: Харесано успешно
+
+  /matches:
+    get:
+      tags: [Matching]
+      summary: Списък с размени
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Успешен отговор
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Match"
+
+  /match/{id}:
+    delete:
+      tags: [Matching]
+      summary: Прекратяване на размяна
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Размяната е прекратена
+
+  /rate/{user_id}:
+    post:
+      tags: [Rating]
+      summary: Оценка на потребител
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                score:
+                  type: integer
+                  minimum: 1
+                  maximum: 5
+                comment:
+                  type: string
+              required: [score]
+      responses:
+        "200":
+          description: Оценката е приета
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    Task:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        category:
+          type: string
+          enum: [essay, code, presentation, design, other]
+        deadline:
+          type: string
+          format: date
+        author:
+          type: object
+          properties:
+            id:
+              type: integer
+            email:
+              type: string
+
+    TaskInput:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        category:
+          type: string
+          enum: [essay, code, presentation, design, other]
+        deadline:
+          type: string
+          format: date
+      required: [title, category, deadline]
+
+    Match:
+      type: object
+      properties:
+        id:
+          type: integer
+        task1:
+          type: string
+        task2:
+          type: string
+        status:
+          type: string
+          enum: [active, cancelled]

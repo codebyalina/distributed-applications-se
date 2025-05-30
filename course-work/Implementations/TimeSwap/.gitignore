@@ -1,0 +1,62 @@
+# === Python / Flask ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.log
+*.sqlite3
+*.db
+*.db-journal
+instance/
+.env
+.env.*
+venv/
+.venv/
+pip-log.txt
+
+# Flask cache
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# SQL Server dumps
+*.bak
+*.mdf
+*.ldf
+
+# === Node / React (Vite) ===
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+dist/
+build/
+.vite/
+
+# === Vite / Frontend artifacts ===
+*.local
+*.cache
+*.DS_Store
+
+# === OS / Editor trash ===
+.DS_Store
+Thumbs.db
+
+# === VS Code ===
+.vscode/
+.history/
+
+# === Testing / Coverage ===
+.coverage
+htmlcov/
+.pytest_cache/
+
+# === Logs ===
+*.log
+
+# === Misc ===
+*.swp
+*.swo
+*.orig

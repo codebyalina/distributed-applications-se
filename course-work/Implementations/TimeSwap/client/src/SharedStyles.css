@@ -1,0 +1,431 @@
+/* SharedStyles.css */
+
+/* Основен контейнер */
+.page-container {
+  max-width: 380px;
+  margin: 110px auto;
+  padding: 32px 28px 26px 28px;
+  border-radius: 1.2rem;
+  background: #171624;
+  box-shadow: 0 2px 32px 2px rgba(87, 33, 135, 0.14), 0 1.5px 12px 1.5px rgba(0,0,0,0.13);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: showup 0.6s;
+}
+
+/* Анимация */
+@keyframes showup {
+  from { opacity: 0; transform: translateY(32px);}
+  to   { opacity: 1; transform: translateY(0);}
+}
+
+.page-container h2 {
+  margin-bottom: 24px;
+  color: #8e24aa;
+  letter-spacing: 1px;
+  font-weight: 800;
+}
+
+.page-container form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.page-container input {
+  padding: 10px 14px;
+  border: 1.3px solid #3c2a55;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  background: #232339;
+  color: #f3e9ff;
+  transition: border 0.2s, background 0.2s;
+}
+
+.page-container input:focus {
+  border: 1.5px solid #8e24aa;
+  background: #231134;
+  outline: 2px solid #8e24aa;
+}
+
+/* +++ Добавен outline и за task-input */
+.task-input:focus {
+  border: 1.5px solid #8e24aa;
+  background: #383157;
+  outline: 2px solid #8e24aa;
+}
+
+/* Стандартен бутон */
+.page-container button[type="submit"] {
+  background: #8e24aa;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 0;
+  margin-top: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-size: 1.08rem;
+  letter-spacing: 1px;
+  box-shadow: 0 1px 8px 0 rgba(87, 33, 135, 0.06);
+}
+
+.page-container button[type="submit"]:disabled {
+  background: #b39ddb;
+  cursor: not-allowed;
+}
+
+/* Линк-бутони (например смяна login/register) */
+.switch-btn {
+  background: none;
+  color: #8e24aa;
+  margin-top: 16px;
+  border: none;
+  box-shadow: none;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 1.01rem;
+  transition: color 0.17s;
+  font-weight: 500;
+}
+.switch-btn:hover {
+  color: #5d166d;
+}
+
+/* Контейнер за dashboard */
+.dashboard-container {
+  max-width: 520px;
+  min-height: 600px;
+}
+
+/* Заглавие и ред */
+.header-row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Заглавие */
+.page-title {
+  margin: 0;
+  color: #8e24aa;
+}
+
+/* Logout бутон */
+.logout-btn {
+  background: #232339;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.logout-btn:disabled { background: #55516e; cursor: not-allowed; }
+
+/* Task form */
+.task-form {
+  width: 100%;
+  margin: 36px 0 14px 0;
+  background: #232339;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 1px 8px #b39ddb1c;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.task-form-title {
+  margin-top: 0;
+  color: #8e24aa;
+}
+.task-input {
+  padding: 10px 14px;
+  border: 1.3px solid #cbbde2;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  background: #2e2947;
+  color: #fff;
+  transition: border 0.2s;
+}
+.task-form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+.main-btn {
+  background: #8e24aa;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 24px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.main-btn:disabled { background: #b39ddb; cursor: not-allowed; }
+.cancel-btn {
+  background: #55516e;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 24px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+/* Task list and cards */
+.task-list {
+  list-style: none;
+  width: 100%;
+  margin-top: 20px;
+  padding: 0;
+}
+.task-card {
+  margin-bottom: 20px;
+  background: #232339;
+  padding: 18px;
+  border-radius: 10px;
+  box-shadow: 0 2px 16px 0 rgba(87,33,135,0.06);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  transition: box-shadow 0.18s;        /* Добавено за по-модерен UX */
+}
+.task-card:hover {
+  box-shadow: 0 4px 32px 0 #8e24aa44, 0 2px 8px 0 #0002;
+}
+
+.task-title {
+  color: #fff;
+  font-size: 1.08rem;
+  font-weight: 700;
+}
+.task-desc {
+  color: #b39ddb;
+  margin: 8px 0 2px 0;
+}
+.task-meta {
+  font-size: 14px;
+  color: #cbbde2;
+}
+
+/* Buttons in task card */
+.task-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+.edit-btn {
+  background: #b39ddb;
+  color: #232339;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.delete-btn {
+  background: #d10036;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.complete-btn {
+  background: #388e3c;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* Info и error съобщения */
+.info {
+  color: #b39ddb;
+  text-align: center;
+}
+.error {
+  color: #d10036;
+  font-weight: bold;
+  margin-top: 10px;
+  text-align: center;
+  animation: shake 0.2s linear 2;
+}
+@keyframes shake {
+  0% { transform: translateX(0);}
+  15% { transform: translateX(-7px);}
+  30% { transform: translateX(7px);}
+  45% { transform: translateX(-7px);}
+  60% { transform: translateX(7px);}
+  75% { transform: translateX(-7px);}
+  100% { transform: translateX(0);}
+}
+/* ------ Responsive Fullscreen Centering ------ */
+html, body, #root {
+  height: 100%;
+  min-height: 100%;
+  width: 100%;
+  background: #171624;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+.fullscreen-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* 👈 если хочешь, чтобы контент начинался сверху */
+  min-height: 100vh;
+  width: 100vw;
+  overflow-y: auto;
+  background: #171624;
+}
+
+
+/* Центриране за главния контейнер */
+.page-container,
+.dashboard-container {
+  min-width: 330px;
+  width: 100%;
+  max-width: 520px;
+  margin: 0;
+  box-sizing: border-box;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .page-container,
+  .dashboard-container {
+    border-radius: 0;
+    min-height: 100vh;
+    min-width: 100vw;
+    max-width: 100vw;
+    padding: 18px 4vw 16px 4vw;
+  }
+  .task-form {
+    padding: 14px 0;
+  }
+}
+
+/* Активен основен бутон */
+.main-btn.active-btn {
+  background: #5d166d;
+  color: #fff;
+  font-weight: 800;
+  border: 2px solid #b39ddb;
+}
+
+/* Пагинация */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.page-btn {
+  padding: 8px 16px;
+  border: none;
+  background-color: #2e2947;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.page-btn:hover {
+  background-color: #3b315e;
+}
+
+.page-btn.active {
+  background-color: #b42da4;
+  color: white;
+}
+
+.animated-message {
+  padding: 18px 26px;
+  border-radius: 1em;
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin: 0 auto;
+  text-align: center;
+  background: #231134e6;
+  color: #fff;
+  box-shadow: 0 4px 32px #a93aaf4c, 0 2px 12px 0 #0004;
+  border: 2px solid #b42da4;
+  opacity: 0;
+  transform: translateY(-20px) scale(0.98);
+  transition: opacity 0.33s, transform 0.35s;
+  pointer-events: none;
+}
+
+.animated-message.show {
+  opacity: 1;
+  transform: translateY(0) scale(1.04);
+  animation: msg-pop 0.4s cubic-bezier(.61,-0.07,.47,1.15) 1;
+}
+
+.animated-message.hide {
+  opacity: 0;
+  transform: translateY(-32px) scale(0.96);
+  transition: opacity 0.5s, transform 0.45s;
+}
+
+.animated-message.error {
+  background: #460017e6;
+  color: #fff;
+  border-color: #d10036;
+  animation: shake 0.23s linear 2, msg-pop 0.41s;
+}
+.animated-message.info {
+  background: #232339e9;
+  color: #fff;
+  border-color: #8e24aa;
+  animation: msg-pop 0.41s;
+}
+
+@keyframes msg-pop {
+  0% { opacity: 0; transform: scale(0.92) translateY(-36px);}
+  48% { opacity: 1; transform: scale(1.08) translateY(0);}
+  72% { opacity: 1; transform: scale(0.97);}
+  100% { opacity: 1; transform: scale(1);}
+}
+
+.dashboard-header {
+  animation: showup 0.6s;
+  /* Другите ти анимации ще се наследят */
+}
+.dashboard-header .logo:hover {
+  color: #fff;
+  text-shadow: 0 0 18px #8e24aa88, 0 0 4px #b39ddb;
+  transition: color 0.2s, text-shadow 0.2s;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(18px);}
+  to   { opacity: 1; transform: translateY(0);}
+}
+.notifications-panel .info, .notifications-panel .error {
+  animation: fadeIn 0.28s, shake 0.17s linear 1;
+}
